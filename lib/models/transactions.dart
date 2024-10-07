@@ -1,13 +1,15 @@
 class Transactions {
   final int? keyID;
-  final String title;
-  final double amount;
+  final String region;
+  final String champion;
+  final String role;
   final DateTime date;
 
   Transactions({
     this.keyID,
-    required this.title,
-    required this.amount,
+    required this.region,
+    required this.champion,
+    required this.role,
     required this.date,
   });
 }

@@ -9,77 +9,91 @@ class FormScreen extends StatelessWidget {
   FormScreen({super.key});
 
   final formKey = GlobalKey<FormState>();
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
+  final championController = TextEditingController();
+  final regionController = TextEditingController();
+  final roleController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('แบบฟอร์มข้อมูล'),
+      appBar: AppBar(
+        title: const Text('แบบฟอร์มข้อมูล'),
+      ),
+      body: Form(
+        key: formKey,
+        child: Column(
+          children: [
+            TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'Champion Name',
+              ),
+              autofocus: false,
+              controller: championController,
+              validator: (String? str) {
+                if (str!.isEmpty) {
+                  return 'กรุณากรอกข้อมูล';
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'Region', // แก้ไขจาก Rigion เป็น Region
+              ),
+              keyboardType: TextInputType.text,
+              controller: regionController,
+              validator: (String? str) {
+                if (str!.isEmpty) {
+                  return 'กรุณากรอกข้อมูล';
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'Role', // เพิ่มฟิลด์สำหรับกรอก Role
+              ),
+              controller: roleController,
+              validator: (String? str) {
+                if (str!.isEmpty) {
+                  return 'กรุณากรอกข้อมูล';
+                }
+                return null;
+              },
+            ),
+            TextButton(
+              child: const Text('บันทึก'),
+              onPressed: () {
+                if (formKey.currentState!.validate()) {
+                  // สร้าง object สำหรับข้อมูล transaction
+                  var statement = Transactions(
+                    keyID: null,
+                    champion: championController.text,
+                    region: regionController.text,
+                    role: roleController.text,
+                    date: DateTime.now(),
+                  );
+
+                  // เพิ่มข้อมูล transaction ไปยัง provider
+                  var provider = Provider.of<TransactionProvider>(context, listen: false);
+                  provider.addTransaction(statement);
+
+                  // ใช้ Navigator.pushReplacement เพื่อไปหน้า Home
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      fullscreenDialog: true,
+                      builder: (context) {
+                        return MyHomePage();
+                      },
+                    ),
+                  );
+                }
+              },
+            ),
+          ],
         ),
-        body: Form(
-            key: formKey,
-            child: Column(
-              children: [
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'ชื่อรายการ',
-                  ),
-                  autofocus: false,
-                  controller: titleController,
-                  validator: (String? str) {
-                    if (str!.isEmpty) {
-                      return 'กรุณากรอกข้อมูล';
-                    }
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'จำนวนเงิน',
-                  ),
-                  keyboardType: TextInputType.number,
-                  controller: amountController,
-                  validator: (String? input) {
-                    try {
-                      double amount = double.parse(input!);
-                      if (amount < 0) {
-                        return 'กรุณากรอกข้อมูลมากกว่า 0';
-                      }
-                    } catch (e) {
-                      return 'กรุณากรอกข้อมูลเป็นตัวเลข';
-                    }
-                    return null;
-                  },
-                ),
-                TextButton(
-                    child: const Text('บันทึก'),
-                    onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        // create transaction data object
-                        var statement = Transactions(
-                            keyID: null,
-                            title: titleController.text,
-                            amount: double.parse(amountController.text),
-                            date: DateTime.now());
-
-                        // add transaction data object to provider
-                        var provider = Provider.of<TransactionProvider>(context,
-                            listen: false);
-
-                        provider.addTransaction(statement);
-
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                fullscreenDialog: true,
-                                builder: (context) {
-                                  return MyHomePage();
-                                }));
-                      }
-                    })
-              ],
-            )));
+      ),
+    );
   }
 }

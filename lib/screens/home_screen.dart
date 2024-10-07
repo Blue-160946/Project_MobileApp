@@ -48,13 +48,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     margin:
                         const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                     child: ListTile(
-                      title: Text(statement.title),
-                      subtitle: Text(DateFormat('dd MMM yyyy hh:mm:ss')
+                      title: Text(statement.champion),
+                      subtitle: 
+                          Text(DateFormat('dd MMM yyyy hh:mm:ss')
                           .format(statement.date)),
                       leading: CircleAvatar(
-                        radius: 30,
+                        radius: 40,
+                        backgroundColor: Color.fromRGBO(200, 155, 60, 1),
                         child: FittedBox(
-                          child: Text('${statement.amount}'),
+                          child: Text(statement.region,
+                          style: TextStyle(fontSize: 15,
+                                  color: Color.fromRGBO(255, 255, 255, 1)),),
                         ),
                       ),
                       trailing: IconButton(
