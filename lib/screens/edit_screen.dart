@@ -59,6 +59,18 @@ class _EditScreenState extends State<EditScreen> {
                     return null;
                   },
                 ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: 'Role',
+                  ),
+                  controller: roleController,
+                  validator: (String? str) {
+                    if (str!.isEmpty) {
+                      return 'กรุณากรอกข้อมูล';
+                    }
+                    return null;
+                  },
+                ),
                 TextButton(
                     child: const Text('แก้ไขข้อมูล'),
                     onPressed: () {

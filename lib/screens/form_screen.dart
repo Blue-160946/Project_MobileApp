@@ -13,6 +13,8 @@ class FormScreen extends StatelessWidget {
   final regionController = TextEditingController();
   final roleController = TextEditingController();
 
+  String? selectedRegion;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,9 +38,37 @@ class FormScreen extends StatelessWidget {
                 return null;
               },
             ),
-            TextFormField(
+
+            DropdownButtonFormField<String>(
               decoration: const InputDecoration(
-                labelText: 'Region', // แก้ไขจาก Rigion เป็น Region
+                labelText: 'Region',
+              ),
+              value: selectedRegion,
+              onChanged: (String? newValue) {
+                selectedRegion = newValue; // อัปเดตค่าที่เลือก
+              },
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'กรุณาเลือกข้อมูล';
+                }
+                return null;
+              },
+              items: <String>[
+                'Region 1',
+                'Region 2',
+                'Region 3',
+                'Region 4',
+              ].map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+
+            /* TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'Region',
               ),
               keyboardType: TextInputType.text,
               controller: regionController,
@@ -48,10 +78,11 @@ class FormScreen extends StatelessWidget {
                 }
                 return null;
               },
-            ),
+            ), */
+
             TextFormField(
               decoration: const InputDecoration(
-                labelText: 'Role', // เพิ่มฟิลด์สำหรับกรอก Role
+                labelText: 'Role',
               ),
               controller: roleController,
               validator: (String? str) {
@@ -65,20 +96,17 @@ class FormScreen extends StatelessWidget {
               child: const Text('บันทึก'),
               onPressed: () {
                 if (formKey.currentState!.validate()) {
-                  // สร้าง object สำหรับข้อมูล transaction
                   var statement = Transactions(
                     keyID: null,
                     champion: championController.text,
-                    region: regionController.text,
+                    region: /* regionController.text */ selectedRegion!,
                     role: roleController.text,
                     date: DateTime.now(),
                   );
 
-                  // เพิ่มข้อมูล transaction ไปยัง provider
                   var provider = Provider.of<TransactionProvider>(context, listen: false);
                   provider.addTransaction(statement);
 
-                  // ใช้ Navigator.pushReplacement เพื่อไปหน้า Home
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(

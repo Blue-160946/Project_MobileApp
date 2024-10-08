@@ -19,13 +19,21 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.primary,
-          title: const Text("League of Legends Universe",
-          style: TextStyle(color: Color.fromRGBO(240, 230, 210, 1),
-          fontWeight: FontWeight.bold,
-          fontSize: 20),),
+          title: const Text(
+            "LOL Universe",
+            style: TextStyle(
+                color: Color.fromRGBO(240, 230, 210, 1),
+                fontWeight: FontWeight.bold,
+                fontSize: 20),
+          ),
+          leading: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(
+                'assets/images/lol_icon.png',
+              )),
           actions: [
             IconButton(
-              icon: const Icon(Icons.exit_to_app),
+              icon: const Icon(Icons.exit_to_app, color: Colors.white),
               onPressed: () {
                 SystemNavigator.pop();
               },
@@ -49,16 +57,25 @@ class _HomeScreenState extends State<HomeScreen> {
                         const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                     child: ListTile(
                       title: Text(statement.champion),
-                      subtitle: 
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Role: ${statement.role}'),
                           Text(DateFormat('dd MMM yyyy hh:mm:ss')
-                          .format(statement.date)),
+                              .format(statement.date)),
+                        ],
+                      ),
+                      /* Text(DateFormat('dd MMM yyyy hh:mm:ss')
+                          .format(statement.date)) */
                       leading: CircleAvatar(
                         radius: 40,
                         backgroundColor: Color.fromRGBO(200, 155, 60, 1),
-                        child: FittedBox(
-                          child: Text(statement.region,
-                          style: TextStyle(fontSize: 15,
-                                  color: Color.fromRGBO(255, 255, 255, 1)),),
+                        child: Text(
+                          statement.region,
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Color.fromRGBO(255, 255, 255, 1),
+                          ),
                         ),
                       ),
                       trailing: IconButton(

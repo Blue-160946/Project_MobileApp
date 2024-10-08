@@ -60,8 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           bottomNavigationBar: TabBar(
             tabs: [
-              Tab(text: "รายการธุรกรรม", icon: Icon(Icons.list),),
-              Tab(text: "เพิ่มข้อมูล", icon: Icon(Icons.add),),
+              Tab(text: "Champions", icon: Icon(Icons.list),),
+              Tab(text: "Add", icon: Icon(Icons.add),),
             ],
           ),
         ));
