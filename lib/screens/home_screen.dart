@@ -13,33 +13,6 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-AssetImage getRegionImage(String region) {
-  switch (region) {
-    case 'Bilgewater':
-      return const AssetImage('assets/images/Bilgewater.png');
-    case 'Demacia':
-      return const AssetImage('assets/images/Demacia.png');
-    case 'Freljord':
-      return const AssetImage('assets/images/Freljord.png');
-    case 'Ionia':
-      return const AssetImage('assets/images/Ionia.png');
-    case 'Ixtal':
-      return const AssetImage('assets/images/Ixtal.png');
-    case 'Noxus':
-      return const AssetImage('assets/images/Noxus.png');
-    case 'Piltover':
-      return const AssetImage('assets/images/Piltover.png');
-    case 'Zaun':
-      return const AssetImage('assets/images/Zaun.png');
-    case 'Targon':
-      return const AssetImage('assets/images/Targon.png');
-    case 'Shurima':
-      return const AssetImage('assets/images/Shurima.png');
-    default:
-      return const AssetImage('assets/images/default.png');
-  }
-}
-
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
@@ -50,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
             "LOL Universe",
             style: TextStyle(
                 color: Color.fromRGBO(240, 230, 210, 1),
+                fontFamily: 'BeaufortForLoL',
                 fontWeight: FontWeight.bold,
                 fontSize: 20),
           ),
@@ -83,28 +57,45 @@ class _HomeScreenState extends State<HomeScreen> {
                     margin:
                         const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                     child: ListTile(
-                      title: Text(statement.champion),
+                      title: Text(statement.champion,
+                            style: TextStyle(
+                              fontFamily: "SpiegelSans-b"
+                            ),),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Role: ${statement.role}'),
+                          Text('Region: ${statement.region}',
+                            style: TextStyle(
+                              fontFamily: "SpiegelSans-r"
+                            ),),
+                          Text('Role: ${statement.role}',
+                            style: TextStyle(
+                              fontFamily: "SpiegelSans-r"
+                            ),),
                           Text(DateFormat('dd MMM yyyy hh:mm:ss')
-                              .format(statement.date)),
+                              .format(statement.date),
+                            style: TextStyle(
+                              fontFamily: "SpiegelSans-r"
+                            ),),
                         ],
                       ),
-                      leading: CircleAvatar(
-                        radius: 40,
-                        backgroundImage: getRegionImage(statement.region),
-                        /* child: Text(
-                          statement.region,
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Color.fromRGBO(255, 255, 255, 1),
-                          ),
-                        ), */
+                      leading: Container(
+                        width: 50,
+                        height: 50,
+                        child: CircleAvatar(
+                          backgroundImage: getRegionImage(statement.region),
+                          backgroundColor: Colors.white,
+                          /* child: Text(
+                            statement.region,
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Color.fromRGBO(255, 255, 255, 1),
+                            ),
+                          ), */
+                        ),
                       ),
                       trailing: IconButton(
-                        icon: const Icon(Icons.delete),
+                        icon: const Icon(Icons.delete, color: Color.fromRGBO(200, 155, 60, 1),),
                         onPressed: () {
                           provider.deleteTransaction(statement.keyID);
                         },
@@ -128,5 +119,34 @@ class _HomeScreenState extends State<HomeScreen> {
         )
         // This trailing comma makes auto-formatting nicer for build methods.
         );
+  }
+}
+
+AssetImage getRegionImage(String region) {
+  switch (region) {
+    case 'Bilgewater':
+      return const AssetImage('assets/images/Bilgewater.png');
+    case 'Demacia':
+      return const AssetImage('assets/images/Demacia.png');
+    case 'Freljord':
+      return const AssetImage('assets/images/Freljord.png');
+    case 'Ionia':
+      return const AssetImage('assets/images/Ionia.png');
+    case 'Ixtal':
+      return const AssetImage('assets/images/Ixtal.png');
+    case 'Noxus':
+      return const AssetImage('assets/images/Noxus.png');
+    case 'Piltover':
+      return const AssetImage('assets/images/Piltover.png');
+    case 'Zaun':
+      return const AssetImage('assets/images/Zaun.png');
+    case 'Targon':
+      return const AssetImage('assets/images/Targon.png');
+    case 'Shurima':
+      return const AssetImage('assets/images/Shurima.png');
+    case 'Shadow Isles':
+      return const AssetImage('assets/images/Shadow-isles.png');
+    default:
+      return const AssetImage('assets/images/default.png');
   }
 }

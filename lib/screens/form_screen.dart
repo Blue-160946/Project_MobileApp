@@ -18,7 +18,15 @@ class FormScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('แบบฟอร์มข้อมูล'),
+        title: const Text('แบบฟอร์มข้อมูล',
+        style: TextStyle(
+          fontFamily: 'BeaufortForLoL'
+        ),),
+        leading: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(
+                'assets/images/lol_icon.png',
+              )),
       ),
       body: Form(
         key: formKey,
@@ -59,9 +67,10 @@ class FormScreen extends StatelessWidget {
                 'Ixtal',
                 'Noxus',
                 'Piltover',
-                'Zaun',
                 'Targon',
-                'Shurima'
+                'Shadow Isles',
+                'Shurima',
+                'Zaun'
               ].map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,

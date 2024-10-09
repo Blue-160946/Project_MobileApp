@@ -60,5 +60,18 @@ flutter:
 
   uses-material-design: true
 
+  fonts:
+  - family: BeaufortForLoL
+    fonts:
+      - asset: assets/fonts/BeaufortforLOL-Heavy.ttf
+  
+  - family: SpiegelSans-r
+    fonts:
+      - asset: assets/fonts/SpiegelSans-5Regular_TRIAL.otf
+
+  - family: SpiegelSans-b
+    fonts:
+      - asset: assets/fonts/SpiegelSans-7Bold_TRIAL.otf
+
   assets:
   - assets/images/

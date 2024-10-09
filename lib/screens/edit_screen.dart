@@ -18,7 +18,7 @@ class _EditScreenState extends State<EditScreen> {
   final formKey = GlobalKey<FormState>();
   final championController = TextEditingController();
   final roleController = TextEditingController();
-  
+
   String? selectedRegion;
 
   @override
@@ -26,7 +26,7 @@ class _EditScreenState extends State<EditScreen> {
     championController.text = widget.statement.champion;
     selectedRegion = widget.statement.region;
     roleController.text = widget.statement.role;
-    
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('แบบฟอร์มแก้ไขข้อมูล'),
@@ -70,9 +70,10 @@ class _EditScreenState extends State<EditScreen> {
                     'Ixtal',
                     'Noxus',
                     'Piltover',
-                    'Zaun',
                     'Targon',
-                    'Shurima'
+                    'Shadow Isles',
+                    'Shurima',
+                    'Zaun'
                   ].map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
