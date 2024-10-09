@@ -17,14 +17,16 @@ class EditScreen extends StatefulWidget {
 class _EditScreenState extends State<EditScreen> {
   final formKey = GlobalKey<FormState>();
   final championController = TextEditingController();
-  final regionController = TextEditingController();
   final roleController = TextEditingController();
+  
+  String? selectedRegion;
 
   @override
   Widget build(BuildContext context) {
     championController.text = widget.statement.champion;
-    regionController.text = widget.statement.region;
+    selectedRegion = widget.statement.region;
     roleController.text = widget.statement.role;
+    
     return Scaffold(
         appBar: AppBar(
           title: const Text('แบบฟอร์มแก้ไขข้อมูล'),
@@ -46,18 +48,37 @@ class _EditScreenState extends State<EditScreen> {
                     return null;
                   },
                 ),
-                TextFormField(
+                DropdownButtonFormField<String>(
                   decoration: const InputDecoration(
                     labelText: 'Region',
                   ),
-                  keyboardType: TextInputType.number,
-                  controller: regionController,
-                  validator: (String? str) {
-                    if (str!.isEmpty) {
-                      return 'กรุณากรอกข้อมูล';
+                  value: selectedRegion,
+                  onChanged: (String? newValue) {
+                    selectedRegion = newValue; // อัปเดตค่าที่เลือก
+                  },
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'กรุณาเลือกข้อมูล';
                     }
                     return null;
                   },
+                  items: <String>[
+                    'Bilgewater',
+                    'Demacia',
+                    'Freljord',
+                    'Ionia',
+                    'Ixtal',
+                    'Noxus',
+                    'Piltover',
+                    'Zaun',
+                    'Targon',
+                    'Shurima'
+                  ].map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
@@ -77,9 +98,9 @@ class _EditScreenState extends State<EditScreen> {
                       if (formKey.currentState!.validate()) {
                         // create transaction data object
                         var statement = Transactions(
-                            keyID: null,
+                            keyID: widget.statement.keyID,
                             champion: championController.text,
-                            region: regionController.text,
+                            region: selectedRegion!,
                             role: roleController.text,
                             date: DateTime.now());
 

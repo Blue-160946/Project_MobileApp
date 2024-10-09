@@ -10,10 +10,9 @@ class FormScreen extends StatelessWidget {
 
   final formKey = GlobalKey<FormState>();
   final championController = TextEditingController();
-  final regionController = TextEditingController();
   final roleController = TextEditingController();
 
-  String? selectedRegion;
+  String? selectedRegion; 
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +37,6 @@ class FormScreen extends StatelessWidget {
                 return null;
               },
             ),
-
             DropdownButtonFormField<String>(
               decoration: const InputDecoration(
                 labelText: 'Region',
@@ -54,10 +52,16 @@ class FormScreen extends StatelessWidget {
                 return null;
               },
               items: <String>[
-                'Region 1',
-                'Region 2',
-                'Region 3',
-                'Region 4',
+                'Bilgewater',
+                'Demacia',
+                'Freljord',
+                'Ionia',
+                'Ixtal',
+                'Noxus',
+                'Piltover',
+                'Zaun',
+                'Targon',
+                'Shurima'
               ].map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
@@ -65,7 +69,7 @@ class FormScreen extends StatelessWidget {
                 );
               }).toList(),
             ),
-
+            
             /* TextFormField(
               decoration: const InputDecoration(
                 labelText: 'Region',

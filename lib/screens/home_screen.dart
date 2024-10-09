@@ -13,6 +13,33 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+AssetImage getRegionImage(String region) {
+  switch (region) {
+    case 'Bilgewater':
+      return const AssetImage('assets/images/Bilgewater.png');
+    case 'Demacia':
+      return const AssetImage('assets/images/Demacia.png');
+    case 'Freljord':
+      return const AssetImage('assets/images/Freljord.png');
+    case 'Ionia':
+      return const AssetImage('assets/images/Ionia.png');
+    case 'Ixtal':
+      return const AssetImage('assets/images/Ixtal.png');
+    case 'Noxus':
+      return const AssetImage('assets/images/Noxus.png');
+    case 'Piltover':
+      return const AssetImage('assets/images/Piltover.png');
+    case 'Zaun':
+      return const AssetImage('assets/images/Zaun.png');
+    case 'Targon':
+      return const AssetImage('assets/images/Targon.png');
+    case 'Shurima':
+      return const AssetImage('assets/images/Shurima.png');
+    default:
+      return const AssetImage('assets/images/default.png');
+  }
+}
+
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
@@ -65,18 +92,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               .format(statement.date)),
                         ],
                       ),
-                      /* Text(DateFormat('dd MMM yyyy hh:mm:ss')
-                          .format(statement.date)) */
                       leading: CircleAvatar(
                         radius: 40,
-                        backgroundColor: Color.fromRGBO(200, 155, 60, 1),
-                        child: Text(
+                        backgroundImage: getRegionImage(statement.region),
+                        /* child: Text(
                           statement.region,
                           style: TextStyle(
                             fontSize: 15,
                             color: Color.fromRGBO(255, 255, 255, 1),
                           ),
-                        ),
+                        ), */
                       ),
                       trailing: IconButton(
                         icon: const Icon(Icons.delete),
