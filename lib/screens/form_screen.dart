@@ -39,6 +39,8 @@ class FormScreen extends StatelessWidget {
             TextFormField(
               decoration: const InputDecoration(
                 labelText: 'Champion Name',
+                labelStyle: TextStyle(
+                  fontFamily: "SpiegelSans-b"),
               ),
               autofocus: false,
               controller: championController,
@@ -52,10 +54,12 @@ class FormScreen extends StatelessWidget {
             DropdownButtonFormField<String>(
               decoration: const InputDecoration(
                 labelText: 'Region',
+                labelStyle: TextStyle(
+                  fontFamily: "SpiegelSans-b"),
               ),
               value: selectedRegion,
               onChanged: (String? newValue) {
-                selectedRegion = newValue; // อัปเดตค่าที่เลือก
+                selectedRegion = newValue;
               },
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
@@ -78,13 +82,18 @@ class FormScreen extends StatelessWidget {
               ].map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
-                  child: Text(value),
+                  child: Text(value,
+                  style: const TextStyle(
+                    fontFamily: "SpiegelSans-r"
+                  ),),
                 );
               }).toList(),
             ),
             TextFormField(
               decoration: const InputDecoration(
                 labelText: 'Role',
+                labelStyle: TextStyle(
+                  fontFamily: "SpiegelSans-b"),
               ),
               controller: roleController,
               validator: (String? str) {
@@ -95,7 +104,14 @@ class FormScreen extends StatelessWidget {
               },
             ),
             TextButton(
-              child: const Text('บันทึก'),
+              child: const Text(
+                'Save',
+                style: TextStyle(
+                  color: Color.fromRGBO(200, 155, 60, 1),
+                  fontFamily: "SpiegelSans-b",
+                  fontSize: 15
+                ),
+              ),
               onPressed: () {
                 if (formKey.currentState!.validate()) {
                   var statement = Transactions(

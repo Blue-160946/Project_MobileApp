@@ -29,7 +29,14 @@ class _EditScreenState extends State<EditScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text('แบบฟอร์มแก้ไขข้อมูล'),
+          title: const Text(
+            'Edit Champion',
+            style: TextStyle(
+                color: Color.fromRGBO(240, 230, 210, 1),
+                fontFamily: 'BeaufortForLoL',
+                fontWeight: FontWeight.bold,
+                fontSize: 20),
+          ),
         ),
         body: Form(
             key: formKey,
@@ -38,6 +45,7 @@ class _EditScreenState extends State<EditScreen> {
                 TextFormField(
                   decoration: const InputDecoration(
                     labelText: 'Champion Name',
+                    labelStyle: TextStyle(fontFamily: "SpiegelSans-b"),
                   ),
                   autofocus: false,
                   controller: championController,
@@ -51,6 +59,7 @@ class _EditScreenState extends State<EditScreen> {
                 DropdownButtonFormField<String>(
                   decoration: const InputDecoration(
                     labelText: 'Region',
+                    labelStyle: TextStyle(fontFamily: "SpiegelSans-b"),
                   ),
                   value: selectedRegion,
                   onChanged: (String? newValue) {
@@ -77,13 +86,17 @@ class _EditScreenState extends State<EditScreen> {
                   ].map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
-                      child: Text(value),
+                      child: Text(
+                        value,
+                        style: const TextStyle(fontFamily: "SpiegelSans-r"),
+                      ),
                     );
                   }).toList(),
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
                     labelText: 'Role',
+                    labelStyle: TextStyle(fontFamily: "SpiegelSans-b"),
                   ),
                   controller: roleController,
                   validator: (String? str) {
@@ -94,7 +107,13 @@ class _EditScreenState extends State<EditScreen> {
                   },
                 ),
                 TextButton(
-                    child: const Text('แก้ไขข้อมูล'),
+                    child: const Text(
+                      'Save',
+                      style: TextStyle(
+                          color: Color.fromRGBO(200, 155, 60, 1),
+                          fontFamily: "SpiegelSans-b",
+                          fontSize: 15),
+                    ),
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
                         // create transaction data object

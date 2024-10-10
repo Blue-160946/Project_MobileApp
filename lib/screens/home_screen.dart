@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.primary,
           title: const Text(
-            "LOL Universe",
+            "Champion LOL Universe",
             style: TextStyle(
                 color: Color.fromRGBO(240, 230, 210, 1),
                 fontFamily: 'BeaufortForLoL',

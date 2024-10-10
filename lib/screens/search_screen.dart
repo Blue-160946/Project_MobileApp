@@ -4,10 +4,10 @@ import 'package:league_of_legends_universe/models/transactions.dart';
 import 'package:league_of_legends_universe/provider/transaction_provider.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({Key? key}) : super(key: key);
+  const SearchScreen({super.key});
 
   @override
-  _SearchScreenState createState() => _SearchScreenState();
+  State<SearchScreen> createState() => _SearchScreenState();
 }
 
 class _SearchScreenState extends State<SearchScreen> {
@@ -37,12 +37,13 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Search',
-        style: TextStyle(
-                color: Color.fromRGBO(240, 230, 210, 1),
-                fontFamily: 'BeaufortForLoL',
-                fontWeight: FontWeight.bold,
-                fontSize: 20),
+        title: const Text(
+          'Search',
+          style: TextStyle(
+              color: Color.fromRGBO(240, 230, 210, 1),
+              fontFamily: 'BeaufortForLoL',
+              fontWeight: FontWeight.bold,
+              fontSize: 20),
         ),
         leading: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -92,6 +93,14 @@ class _SearchScreenState extends State<SearchScreen> {
                                 ),
                               ],
                             ),
+                            leading: Container(
+                              width: 50,
+                              height: 50,
+                              child: CircleAvatar(
+                                backgroundImage: getRegionImage(result.region),
+                                backgroundColor: Colors.white,
+                              ),
+                            ),
                           );
                         },
                       )
@@ -102,5 +111,34 @@ class _SearchScreenState extends State<SearchScreen> {
         },
       ),
     );
+  }
+}
+
+AssetImage getRegionImage(String region) {
+  switch (region) {
+    case 'Bilgewater':
+      return const AssetImage('assets/images/Bilgewater.png');
+    case 'Demacia':
+      return const AssetImage('assets/images/Demacia.png');
+    case 'Freljord':
+      return const AssetImage('assets/images/Freljord.png');
+    case 'Ionia':
+      return const AssetImage('assets/images/Ionia.png');
+    case 'Ixtal':
+      return const AssetImage('assets/images/Ixtal.png');
+    case 'Noxus':
+      return const AssetImage('assets/images/Noxus.png');
+    case 'Piltover':
+      return const AssetImage('assets/images/Piltover.png');
+    case 'Zaun':
+      return const AssetImage('assets/images/Zaun.png');
+    case 'Targon':
+      return const AssetImage('assets/images/Targon.png');
+    case 'Shurima':
+      return const AssetImage('assets/images/Shurima.png');
+    case 'Shadow Isles':
+      return const AssetImage('assets/images/Shadow-isles.png');
+    default:
+      return const AssetImage('assets/images/default.png');
   }
 }
