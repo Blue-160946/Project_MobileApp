@@ -12,21 +12,25 @@ class FormScreen extends StatelessWidget {
   final championController = TextEditingController();
   final roleController = TextEditingController();
 
-  String? selectedRegion; 
+  String? selectedRegion;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('แบบฟอร์มข้อมูล',
-        style: TextStyle(
-          fontFamily: 'BeaufortForLoL'
-        ),),
+        title: const Text(
+          'Add Champion',
+          style: TextStyle(
+              color: Color.fromRGBO(240, 230, 210, 1),
+              fontFamily: 'BeaufortForLoL',
+              fontWeight: FontWeight.bold,
+              fontSize: 20),
+        ),
         leading: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.asset(
-                'assets/images/lol_icon.png',
-              )),
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              'assets/images/lol_icon.png',
+            )),
       ),
       body: Form(
         key: formKey,
@@ -78,21 +82,6 @@ class FormScreen extends StatelessWidget {
                 );
               }).toList(),
             ),
-            
-            /* TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Region',
-              ),
-              keyboardType: TextInputType.text,
-              controller: regionController,
-              validator: (String? str) {
-                if (str!.isEmpty) {
-                  return 'กรุณากรอกข้อมูล';
-                }
-                return null;
-              },
-            ), */
-
             TextFormField(
               decoration: const InputDecoration(
                 labelText: 'Role',
@@ -117,7 +106,8 @@ class FormScreen extends StatelessWidget {
                     date: DateTime.now(),
                   );
 
-                  var provider = Provider.of<TransactionProvider>(context, listen: false);
+                  var provider =
+                      Provider.of<TransactionProvider>(context, listen: false);
                   provider.addTransaction(statement);
 
                   Navigator.pushReplacement(

@@ -3,6 +3,7 @@ import 'package:league_of_legends_universe/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:league_of_legends_universe/provider/transaction_provider.dart';
+import 'package:league_of_legends_universe/screens/search_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,8 +24,13 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'League of Legends Universe',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromRGBO(10, 50, 60, 1)),
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromRGBO(0, 90, 130, 1)
+          ),
           useMaterial3: true,
+          appBarTheme: AppBarTheme(
+            backgroundColor:const Color.fromRGBO(0, 90, 130, 1),
+          ),
         ),
         home: const MyHomePage(),
       ),
@@ -50,20 +56,23 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 2,
+        length: 3,
         child: Scaffold(
           body: TabBarView(
             children: [
               HomeScreen(),
               FormScreen(),
+              SearchScreen(),
             ],
           ),
           bottomNavigationBar: TabBar(
             tabs: [
               Tab(text: "Champions", icon: Icon(Icons.list),),
               Tab(text: "Add", icon: Icon(Icons.add),),
+              Tab(text: "Search", icon: Icon(Icons.search),)
             ],
           ),
-        ));
+        )
+    );
   }
 }

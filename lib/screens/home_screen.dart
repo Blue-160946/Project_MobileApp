@@ -57,26 +57,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     margin:
                         const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                     child: ListTile(
-                      title: Text(statement.champion,
-                            style: TextStyle(
-                              fontFamily: "SpiegelSans-b"
-                            ),),
+                      title: Text(
+                        statement.champion,
+                        style: TextStyle(fontFamily: "SpiegelSans-b"),
+                      ),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Region: ${statement.region}',
-                            style: TextStyle(
-                              fontFamily: "SpiegelSans-r"
-                            ),),
-                          Text('Role: ${statement.role}',
-                            style: TextStyle(
-                              fontFamily: "SpiegelSans-r"
-                            ),),
-                          Text(DateFormat('dd MMM yyyy hh:mm:ss')
-                              .format(statement.date),
-                            style: TextStyle(
-                              fontFamily: "SpiegelSans-r"
-                            ),),
+                          Text(
+                            'Region: ${statement.region}',
+                            style: TextStyle(fontFamily: "SpiegelSans-r"),
+                          ),
+                          Text(
+                            'Role: ${statement.role}',
+                            style: TextStyle(fontFamily: "SpiegelSans-r"),
+                          ),
+                          Text(
+                            DateFormat('dd MMM yyyy hh:mm:ss')
+                                .format(statement.date),
+                            style: TextStyle(fontFamily: "SpiegelSans-r"),
+                          ),
                         ],
                       ),
                       leading: Container(
@@ -85,17 +85,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: CircleAvatar(
                           backgroundImage: getRegionImage(statement.region),
                           backgroundColor: Colors.white,
-                          /* child: Text(
-                            statement.region,
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Color.fromRGBO(255, 255, 255, 1),
-                            ),
-                          ), */
                         ),
                       ),
                       trailing: IconButton(
-                        icon: const Icon(Icons.delete, color: Color.fromRGBO(200, 155, 60, 1),),
+                        icon: const Icon(
+                          Icons.delete,
+                          color: Color.fromRGBO(200, 155, 60, 1),
+                        ),
                         onPressed: () {
                           provider.deleteTransaction(statement.keyID);
                         },
@@ -116,9 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             }
           },
-        )
-        // This trailing comma makes auto-formatting nicer for build methods.
-        );
+        ));
   }
 }
 
