@@ -13,6 +13,7 @@ class FormScreen extends StatelessWidget {
   final roleController = TextEditingController();
 
   String? selectedRegion;
+  String? selectedRole;
 
   @override
   Widget build(BuildContext context) {
@@ -32,113 +33,132 @@ class FormScreen extends StatelessWidget {
               'assets/images/lol_icon.png',
             )),
       ),
-      body: Form(
-        key: formKey,
-        child: Column(
-          children: [
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Champion Name',
-                labelStyle: TextStyle(
-                  fontFamily: "SpiegelSans-b"),
-              ),
-              autofocus: false,
-              controller: championController,
-              validator: (String? str) {
-                if (str!.isEmpty) {
-                  return 'กรุณากรอกข้อมูล';
-                }
-                return null;
-              },
-            ),
-            DropdownButtonFormField<String>(
-              decoration: const InputDecoration(
-                labelText: 'Region',
-                labelStyle: TextStyle(
-                  fontFamily: "SpiegelSans-b"),
-              ),
-              value: selectedRegion,
-              onChanged: (String? newValue) {
-                selectedRegion = newValue;
-              },
-              validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return 'กรุณาเลือกข้อมูล';
-                }
-                return null;
-              },
-              items: <String>[
-                'Bilgewater',
-                'Demacia',
-                'Freljord',
-                'Ionia',
-                'Ixtal',
-                'Noxus',
-                'Piltover',
-                'Targon',
-                'Shadow Isles',
-                'Shurima',
-                'Zaun'
-              ].map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value,
-                  style: const TextStyle(
-                    fontFamily: "SpiegelSans-r"
-                  ),),
-                );
-              }).toList(),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Role',
-                labelStyle: TextStyle(
-                  fontFamily: "SpiegelSans-b"),
-              ),
-              controller: roleController,
-              validator: (String? str) {
-                if (str!.isEmpty) {
-                  return 'กรุณากรอกข้อมูล';
-                }
-                return null;
-              },
-            ),
-            TextButton(
-              child: const Text(
-                'Save',
-                style: TextStyle(
-                  color: Color.fromRGBO(200, 155, 60, 1),
-                  fontFamily: "SpiegelSans-b",
-                  fontSize: 15
+      body: Padding(
+        padding: const EdgeInsets.all(9.0),
+        child: Form(
+          key: formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Champion Name',
+                  labelStyle: TextStyle(fontFamily: "SpiegelSans-b"),
                 ),
+                controller: championController,
+                validator: (String? str) {
+                  if (str!.isEmpty) {
+                    return 'กรุณากรอกข้อมูล';
+                  }
+                  return null;
+                },
               ),
-              onPressed: () {
-                if (formKey.currentState!.validate()) {
-                  var statement = Transactions(
-                    keyID: null,
-                    champion: championController.text,
-                    region: /* regionController.text */ selectedRegion!,
-                    role: roleController.text,
-                    date: DateTime.now(),
-                  );
-
-                  var provider =
-                      Provider.of<TransactionProvider>(context, listen: false);
-                  provider.addTransaction(statement);
-
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      fullscreenDialog: true,
-                      builder: (context) {
-                        return MyHomePage();
-                      },
+              DropdownButtonFormField<String>(
+                decoration: const InputDecoration(
+                  labelText: 'Region',
+                  labelStyle: TextStyle(fontFamily: "SpiegelSans-b"),
+                ),
+                value: selectedRegion,
+                onChanged: (String? newValue) {
+                  selectedRegion = newValue;
+                },
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return 'กรุณาเลือกข้อมูล';
+                  }
+                  return null;
+                },
+                menuMaxHeight: 200,
+                items: <String>[
+                  'Bandle City',
+                  'Bilgewater',
+                  'Demacia',
+                  'Freljord',
+                  'Ionia',
+                  'Ixtal',
+                  'Noxus',
+                  'Piltover',
+                  'Targon',
+                  'Shadow Isles',
+                  'Shurima',
+                  'Zaun'
+                ].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(
+                      value,
+                      style: const TextStyle(fontFamily: "SpiegelSans-r"),
                     ),
                   );
-                }
-              },
-            ),
-          ],
+                }).toList(),
+              ),
+              DropdownButtonFormField<String>(
+                decoration: const InputDecoration(
+                  labelText: 'Role',
+                  labelStyle: TextStyle(fontFamily: "SpiegelSans-b"),
+                ),
+                value: selectedRole,
+                onChanged: (String? newValue) {
+                  selectedRole = newValue;
+                },
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return 'กรุณาเลือกข้อมูล';
+                  }
+                  return null;
+                },
+                menuMaxHeight: 200,
+                items: <String>[
+                  'Controller',
+                  'Fighter',
+                  'Mage', 
+                  'Marksman', 
+                  'Slayer',
+                  'Tank',
+                ].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(
+                      value,
+                      style: const TextStyle(fontFamily: "SpiegelSans-r"),
+                    ),
+                  );
+                }).toList(),
+              ),
+              TextButton(
+                child: const Text(
+                  'Save',
+                  style: TextStyle(
+                      color: Color.fromRGBO(200, 155, 60, 1),
+                      fontFamily: "SpiegelSans-b",
+                      fontSize: 15),
+                ),
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    var statement = Transactions(
+                      keyID: null,
+                      champion: championController.text,
+                      region: selectedRegion!,
+                      role: selectedRole!,
+                      date: DateTime.now(),
+                    );
+                    var provider = Provider.of<TransactionProvider>(context,
+                        listen: false);
+                    provider.addTransaction(statement);
+
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        fullscreenDialog: true,
+                        builder: (context) {
+                          return MyHomePage();
+                        },
+                      ),
+                    );
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

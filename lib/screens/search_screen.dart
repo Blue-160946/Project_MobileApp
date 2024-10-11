@@ -75,36 +75,64 @@ class _SearchScreenState extends State<SearchScreen> {
                         itemCount: searchResults.length,
                         itemBuilder: (context, index) {
                           var result = searchResults[index];
-                          return ListTile(
-                            title: Text(
-                              result.champion,
-                              style: TextStyle(fontFamily: "SpiegelSans-b"),
-                            ),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Region: ${result.region}',
-                                  style: TextStyle(fontFamily: "SpiegelSans-r"),
+                          return Card(
+                            elevation: 5,
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 8),
+                            child: ListTile(
+                              title: Text(
+                                result.champion,
+                                style: TextStyle(fontFamily: "SpiegelSans-b"),
+                              ),
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Region: ${result.region}',
+                                    style:
+                                        TextStyle(fontFamily: "SpiegelSans-r"),
+                                  ),
+                                  Text(
+                                    'Role: ${result.role}',
+                                    style:
+                                        TextStyle(fontFamily: "SpiegelSans-r"),
+                                  ),
+                                ],
+                              ),
+                              leading: Container(
+                                width: 50,
+                                height: 50,
+                                child: CircleAvatar(
+                                  backgroundImage:
+                                      getRegionImage(result.region),
+                                  backgroundColor: Colors.white,
                                 ),
-                                Text(
-                                  'Role: ${result.role}',
-                                  style: TextStyle(fontFamily: "SpiegelSans-r"),
-                                ),
-                              ],
-                            ),
-                            leading: Container(
-                              width: 50,
-                              height: 50,
-                              child: CircleAvatar(
-                                backgroundImage: getRegionImage(result.region),
-                                backgroundColor: Colors.white,
                               ),
                             ),
                           );
                         },
                       )
-                    : const Center(child: Text('No results found')),
+                    : Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              'No result found.',
+                              style: TextStyle(
+                                  fontFamily: "SpiegelSans-b", fontSize: 13),
+                            ),
+                            const SizedBox(height: 20),
+                            Opacity(
+                              opacity: 0.1,
+                              child: Image.asset(
+                                'assets/images/Teemo.png',
+                                width: 100,
+                                height: 100,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
               )
             ],
           );
@@ -116,6 +144,8 @@ class _SearchScreenState extends State<SearchScreen> {
 
 AssetImage getRegionImage(String region) {
   switch (region) {
+    case 'Bandle City':
+      return const AssetImage('assets/images/Bandle-city.png');
     case 'Bilgewater':
       return const AssetImage('assets/images/Bilgewater.png');
     case 'Demacia':

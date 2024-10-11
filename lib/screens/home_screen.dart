@@ -75,7 +75,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           Text(
                             DateFormat('dd MMM yyyy hh:mm:ss')
                                 .format(statement.date),
-                            style: TextStyle(fontFamily: "SpiegelSans-r"),
+                            style: TextStyle(fontFamily: "SpiegelSans-r",
+                              fontSize: 10),
                           ),
                         ],
                       ),
@@ -118,6 +119,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
 AssetImage getRegionImage(String region) {
   switch (region) {
+    case 'Bandle City':
+      return const AssetImage('assets/images/Bandle-city.png');
     case 'Bilgewater':
       return const AssetImage('assets/images/Bilgewater.png');
     case 'Demacia':
