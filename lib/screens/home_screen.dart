@@ -20,12 +20,12 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.primary,
           title: const Text(
-            "Champion LOL Universe",
+            "Champions LOL Universe",
             style: TextStyle(
                 color: Color.fromRGBO(240, 230, 210, 1),
                 fontFamily: 'BeaufortForLoL',
                 fontWeight: FontWeight.bold,
-                fontSize: 20),
+                fontSize: 19),
           ),
           leading: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -44,8 +44,26 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Consumer(
           builder: (context, TransactionProvider provider, Widget? child) {
             if (provider.transactions.isEmpty) {
-              return const Center(
-                child: Text('ไม่มีรายการ'),
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'No champions.',
+                      style:
+                          TextStyle(fontFamily: "SpiegelSans-b", fontSize: 13),
+                    ),
+                    const SizedBox(height: 20),
+                    Opacity(
+                      opacity: 0.1,
+                      child: Image.asset(
+                        'assets/images/Teemo.png',
+                        width: 100,
+                        height: 100,
+                      ),
+                    ),
+                  ],
+                ),
               );
             } else {
               return ListView.builder(
@@ -75,8 +93,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           Text(
                             DateFormat('dd MMM yyyy hh:mm:ss')
                                 .format(statement.date),
-                            style: TextStyle(fontFamily: "SpiegelSans-r",
-                              fontSize: 10),
+                            style: TextStyle(
+                                fontFamily: "SpiegelSans-r", fontSize: 10),
                           ),
                         ],
                       ),

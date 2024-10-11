@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:league_of_legends_universe/models/transactions.dart';
 import 'package:league_of_legends_universe/provider/transaction_provider.dart';
+import 'package:league_of_legends_universe/screens/edit_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -108,6 +109,25 @@ class _SearchScreenState extends State<SearchScreen> {
                                   backgroundColor: Colors.white,
                                 ),
                               ),
+                              trailing: IconButton(
+                                icon: const Icon(
+                                  Icons.delete,
+                                  color: Color.fromRGBO(200, 155, 60, 1),
+                                ),
+                                onPressed: () {
+                                  provider.deleteTransaction(result.keyID);
+                                },
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return EditScreen(statement: result);
+                                    },
+                                  ),
+                                );
+                              },
                             ),
                           );
                         },
